@@ -1,7 +1,25 @@
 server:
-  port: 8080
-spring:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+
+app:
   security:
-    user:
-      name: user
-      password: password
+    jwt:
+      # Required. Generate with: openssl rand -base64 32
+      secret-base64: ${JWT_SECRET_BASE64}
+      issuer: ${JWT_ISSUER:pragma-security-challenge}
+      # Short-lived access token; max 3600 seconds enforced by configuration validation.
+      expiration-seconds: ${JWT_EXPIRATION_SECONDS:900}
+    users:
+      user:
+        username: ${APP_USER_USERNAME:challenge-user}
+        password: ${APP_USER_PASSWORD}
+      admin:
+        username: ${APP_ADMIN_USERNAME:challenge-admin}
+        password: ${APP_ADMIN_PASSWORD}
+
+spring:
+  main:
+    banner-mode: "off"

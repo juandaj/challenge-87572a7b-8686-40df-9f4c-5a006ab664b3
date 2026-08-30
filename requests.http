@@ -1,0 +1,19 @@
+### Public health
+GET http://localhost:8080/api/public/health
+
+### Login USER (replace password)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "challenge-user",
+  "password": "{{userPassword}}"
+}
+
+### Secured hello (replace token)
+GET http://localhost:8080/api/secured/hello
+Authorization: Bearer {{userToken}}
+
+### Admin endpoint with admin token
+GET http://localhost:8080/api/secured/admin
+Authorization: Bearer {{adminToken}}
